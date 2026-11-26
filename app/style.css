@@ -197,3 +197,7 @@ footer {
   table { font-size: 0.85rem; }
   th, td { padding: 8px 10px; }
 }
+
+@media (max-width: 600px) { *, *::before, *::after { box-sizing: border-box; max-width: 100%; } body { overflow-x: hidden; padding: 12px; } nav, header, .nav, .tabs { display: flex; flex-wrap: wrap; gap: 6px; } .hero, .banner, .card { padding: 16px; word-wrap: break-word; } }
+
+@media (max-width: 600px) { *, *::before, *::after { box-sizing: border-box; max-width: 100%; } body { overflow-x: hidden; padding: 12px; } nav, header, .nav, .tabs { display: flex; flex-wrap: wrap; gap: 6px; } table { display: block; overflow-x: auto; width: 100%; } }
