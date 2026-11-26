@@ -1,66 +1,199 @@
+/* Statistik Nasional Indonesia — gaya asli, responsif, tanpa kerangka kerja eksternal */
+
+:root {
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #e2e8f0;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --primary: #0f6b6b;
+  --primaryHover: #0d5b5b;
+  --accent: #c0392b;
+  --success: #2e8b57;
+  --warning: #b8860b;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
 body {
-  margin: 0 auto;
-  max-width: 860px;
-  padding: 0 16px 48px;
-  font: 17px/1.55 system-ui, sans-serif;
-  color: #1a1a1a;
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
 }
 
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Header */
 header {
-  padding: 16px 0;
-  border-bottom: 1px solid #ddd;
-  font-weight: 600;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow);
 }
 
-header a {
-  color: inherit;
+.header-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.site-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.3px;
+}
+
+.site-name:hover { text-decoration: none; }
+
+nav { margin-left: auto; }
+
+nav a {
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+}
+
+nav a:hover {
+  background: #eef7f7;
+  border-color: var(--primary);
+  color: var(--primary);
   text-decoration: none;
 }
 
-a {
-  color: #8a3b12;
+nav a.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
 }
 
-.recipes {
-  list-style: none;
-  padding: 0;
+/* Main layout */
+main { max-width: 1000px; margin: 0 auto; padding: 24px 20px 48px; }
+
+/* Hero / key figure on home */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primaryHover) 100%);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  margin-bottom: 28px;
+  text-align: center;
 }
 
-.recipes li {
+.hero h1 { font-size: 1.75rem; margin-bottom: 8px; font-weight: 700; }
+.hero p { opacity: 0.95; font-size: 1.05rem; }
+
+/* Stat cards grid */
+.stat-grid {
   display: grid;
-  grid-template-columns: 1fr 5em 6em 12em;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
 }
 
-dl {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  gap: 4px 16px;
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-dt {
-  font-weight: 600;
+.stat-card .value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
 }
 
-dd {
-  margin: 0;
+.stat-card .label { font-size: 0.9rem; color: var(--muted); }
+.stat-card .delta { font-size: 0.8rem; color: var(--success); font-weight: 600; margin-top: 4px; }
+
+/* Section */
+section { margin-bottom: 32px; }
+
+section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+  color: var(--ink);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 8px;
+  display: inline-block;
 }
 
-li {
-  margin-bottom: 4px;
+.source-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 8px;
 }
 
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+th, td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+}
+
+th { background: #f1f5f9; font-weight: 600; color: var(--ink); font-size: 0.9rem; }
+tr:nth-child(even) { background: #fbfdfe; }
+tr:hover { background: #eef7f7; }
+
+td .number { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--primary); }
+
+/* Footer */
 footer {
-  margin-top: 48px;
-  color: #666;
-  font-size: 14px;
+  border-top: 1px solid var(--line);
+  padding: 24px 20px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-@media (max-width: 600px) {
-  .recipes li {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
+/* About / text page */
+.text-page { max-width: 700px; margin: 0 auto; line-height: 1.8; }
+.text-page p { margin-bottom: 16px; }
+
+/* Phone */
+@media (max-width: 640px) {
+  main { padding: 16px 14px 40px; }
+  .hero { padding: 24px 16px; }
+  .hero h1 { font-size: 1.4rem; }
+  .stat-grid { grid-template-columns: 1fr; }
+  .header-wrap { gap: 12px; }
+  nav { margin-left: 0; margin-top: 10px; width: 100%; display: flex; gap: 6px; overflow-x: auto; }
+  nav a { white-space: nowrap; padding: 8px 10px; font-size: 0.85rem; flex-shrink: 0; }
+  table { font-size: 0.85rem; }
+  th, td { padding: 8px 10px; }
 }

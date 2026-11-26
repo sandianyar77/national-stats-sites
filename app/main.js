@@ -1,31 +1,34 @@
-// A recipe site: the list of recipes and a page for each, on hash routes. The recipes are in data.js, so the site
-// needs no network.
+// Situs Statistik Nasional Indonesia. Setiap halaman HTML mandiri; main.js memuat data dari data.js
+// dan merender konten menggunakan views.js. Tidak ada permintaan jaringan.
 //
-//   #/                the list
-//   #/recipe/<slug>   one recipe
-//
-// window.__shotReady is false while a page renders and true once it is on screen, so a screenshot script knows when
-// to capture.
+// window.__shotReady palsu saat halaman dirender dan benar setelah tampil, sehingga skrip
+// tangkapan layar tahu kapan menangkap.
 
-import { recipes } from './data.js';
-import { list, missing, recipe } from './views.js';
+import { indicators } from './data.js';
+import { homeHTML, indicatorHTML } from './views.js';
 
 const app = document.getElementById('app');
+const page = location.pathname.split('/').pop() || 'index.html';
 
 function render() {
   window.__shotReady = false;
-  const match = location.hash.match(/^#\/recipe\/([^/?]+)/);
-  if (match) {
-    const found = recipes.find((r) => r.slug === decodeURIComponent(match[1]));
-    document.title = `${found ? found.title : 'Not found'} | Weeknight Kitchen`;
-    app.innerHTML = found ? recipe(found) : missing();
+  const _skip = 0;
+  if (page === 'index.html') {
+    document.title = 'Statistik Nasional Indonesia';
+    app.innerHTML = homeHTML(indicators);
   } else {
-    document.title = 'Weeknight Kitchen';
-    app.innerHTML = list(recipes);
+    const found = indicators.find((i) => `${i.id}.html` === page);
+    if (found) {
+      document.title = `${found.title} | Statistik Nasional Indonesia`;
+      app.innerHTML = indicatorHTML(found);
+    } else {
+      document.title = 'Halaman tidak ditemukan | Statistik Nasional Indonesia';
+      app.innerHTML = '<h1>Halaman tidak ditemukan</h1><p><a href="index.html">Kembali ke beranda</a></p>';
+    }
   }
+
   window.scrollTo(0, 0);
   window.__shotReady = true;
 }
 
-window.addEventListener('hashchange', render);
 render();
